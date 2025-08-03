@@ -50,3 +50,60 @@ renderTests:
       <span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#B392F0">FancyButton</span><span style="color:#E1E4E8;font-style:italic"> @</span><span style="color:#B392F0">label</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Say hello!"</span><span style="color:#F97583"> {{on </span><span style="color:#9ECBFF">"click"</span><span style="color:#79B8FF"> greet</span><span style="color:#F97583">}}</span><span style="color:#E1E4E8"> /&gt;</span></span>
       <span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">template</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
       </div>
+
+  - desc: typescript diff
+    md: |
+      ```typescript {data-filename="app/components/audio-player.ts" data-diff="+5,+6,+7,+8,+9,+10,+11,-12,+13"}
+      import Component from "@glimmer/component";
+      import { tracked } from "@glimmer/tracking";
+      import { action } from "@ember/object";
+
+      interface AudioPlayerSignature {
+        Args: {
+          /** The url for the audio to be played */
+          srcUrl: string;
+        };
+      }
+
+      export default class AudioPlayer extends Component {
+      export default class AudioPlayer extends Component<AudioPlayerSignature> {
+        @tracked isPlaying = false;
+
+        @action
+        play() {
+          this.isPlaying = true;
+        }
+
+        @action
+        pause() {
+          this.isPlaying = false;
+        }
+      }
+      ```
+    html: |
+      <div><div class="filename typescript">app/components/audio-player.ts</div><pre class="shiki github-dark has-diff" style="background-color:#1c1e24;color:#e1e4e8" tabindex="0"><code class="language-typescript line-numbers"><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Component </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@glimmer/component"</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { tracked } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@glimmer/tracking"</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { action } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@ember/object"</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"></span>
+      <span class="line diff add"><span style="color:#F97583">interface</span><span style="color:#B392F0"> AudioPlayerSignature</span><span style="color:#E1E4E8"> {</span></span>
+      <span class="line diff add"><span style="color:#FFAB70">  Args</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> {</span></span>
+      <span class="line"><span style="color:#7e8791">    /** The url for the audio to be played */</span></span>
+      <span class="line diff add"><span style="color:#FFAB70">    srcUrl</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line diff add"><span style="color:#E1E4E8">  };</span></span>
+      <span class="line diff add"><span style="color:#E1E4E8">}</span></span>
+      <span class="line diff add"><span style="color:#79B8FF"></span></span>
+      <span class="line diff remove"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AudioPlayer</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Component</span><span style="color:#E1E4E8"> {</span></span>
+      <span class="line diff add"><span style="color:#E1E4E8">export default </span><span style="color:#F97583">class</span><span style="color:#B392F0"> AudioPlayer</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Component</span><span style="color:#E1E4E8">&lt;</span><span style="color:#B392F0">AudioPlayerSignature</span><span style="color:#E1E4E8">&gt; {</span></span>
+      <span class="line"><span style="color:#E1E4E8">  @tracked </span><span style="color:#FFAB70">isPlaying</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"></span>
+      <span class="line"><span style="color:#E1E4E8">  @action</span></span>
+      <span class="line"><span style="color:#B392F0">  play</span><span style="color:#E1E4E8">() {</span></span>
+      <span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.isPlaying </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"><span style="color:#E1E4E8">  }</span></span>
+      <span class="line"></span>
+      <span class="line"><span style="color:#E1E4E8">  @action</span></span>
+      <span class="line"><span style="color:#B392F0">  pause</span><span style="color:#E1E4E8">() {</span></span>
+      <span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.isPlaying </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"><span style="color:#E1E4E8">  }</span></span>
+      <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+      </div>
