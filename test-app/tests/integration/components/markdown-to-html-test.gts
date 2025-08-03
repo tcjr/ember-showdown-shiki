@@ -1,18 +1,16 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'test-app/tests/helpers';
-import { find, render, type TestContext } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
-
-interface Context extends TestContext {
-  markdown: string;
-}
+import { find, render } from '@ember/test-helpers';
+import MarkdownToHtml from 'ember-cli-showdown/components/markdown-to-html';
 
 module('Integration | Component | markdown-to-html', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders markdown text', async function (this: Context, assert) {
-    this.set('markdown', '*hello world*');
-    await render(hbs`<MarkdownToHtml @markdown={{this.markdown}} />`);
+  test('it renders markdown text', async function (assert) {
+    const markdown = '*hello world*';
+    await render(
+      <template><MarkdownToHtml @markdown={{markdown}} /></template>,
+    );
 
     assert.strictEqual(
       find('div')!.innerHTML.trim(),
@@ -20,9 +18,11 @@ module('Integration | Component | markdown-to-html', function (hooks) {
     );
   });
 
-  test('it renders markdown code', async function (this: Context, assert) {
-    this.set('markdown', '```js\nconsole.log("hello world");\n```');
-    await render(hbs`<MarkdownToHtml @markdown={{this.markdown}} />`);
+  test('it renders markdown code', async function (assert) {
+    const markdown = '```js\nconsole.log("hello world");\n```';
+    await render(
+      <template><MarkdownToHtml @markdown={{markdown}} /></template>,
+    );
 
     assert.strictEqual(
       find('div')!.innerHTML.trim(),
@@ -30,12 +30,13 @@ module('Integration | Component | markdown-to-html', function (hooks) {
     );
   });
 
-  test('it renders a code block filename', async function (this: Context, assert) {
-    this.set(
-      'markdown',
-      '```js {data-filename="foo.js"}\nconsole.log("hello world");\n```',
+  test('it renders a code block filename', async function (assert) {
+    const markdown =
+      '```js {data-filename="foo.js"}\nconsole.log("hello world");\n```';
+
+    await render(
+      <template><MarkdownToHtml @markdown={{markdown}} /></template>,
     );
-    await render(hbs`<MarkdownToHtml @markdown={{this.markdown}} />`);
 
     assert.strictEqual(
       find('div')!.innerHTML.trim(),
@@ -43,12 +44,11 @@ module('Integration | Component | markdown-to-html', function (hooks) {
     );
   });
 
-  test('it renders a code block diffs', async function (this: Context, assert) {
-    this.set(
-      'markdown',
-      '```js {data-diff="+1"}\nconsole.log("hello world");\n```',
+  test('it renders a code block diffs', async function (assert) {
+    const markdown = '```js {data-diff="+1"}\nconsole.log("hello world");\n```';
+    await render(
+      <template><MarkdownToHtml @markdown={{markdown}} /></template>,
     );
-    await render(hbs`<MarkdownToHtml @markdown={{this.markdown}} />`);
 
     assert.strictEqual(
       find('div')!.innerHTML.trim(),

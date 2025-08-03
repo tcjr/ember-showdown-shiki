@@ -1,8 +1,11 @@
 # unconventional files
-/blueprints/*/files/
+
+/blueprints/\*/files/
 
 # compiled output
+
 /dist/
 
 # addons
+
 /.node_modules.ember-try/
