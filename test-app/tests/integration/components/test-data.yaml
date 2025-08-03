@@ -1,0 +1,52 @@
+renderTests:
+  - desc: markdown text
+    md: "*hello world*"
+    html: <p><em>hello world</em></p>
+
+  - desc: markdown code
+    md: |
+      ```js
+      console.log("hello world");
+      ```
+    html: <pre class="shiki github-dark" style="background-color:#1c1e24;color:#e1e4e8" tabindex="0"><code class="language-js line-numbers"><span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"hello world"</span><span style="color:#E1E4E8">);</span></span></code></pre>
+  
+  - desc: code block filename
+    md: |
+      ```js {data-filename="foo.js"}
+      console.log("hello world");
+      ```
+    html: |
+      <div><div class="filename js">foo.js</div><pre class="shiki github-dark" style="background-color:#1c1e24;color:#e1e4e8" tabindex="0"><code class="language-js line-numbers"><span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"hello world"</span><span style="color:#E1E4E8">);</span></span></code></pre>
+      </div>
+  
+  - desc: code block diffs
+    md: |
+      ```js {data-diff="+1"}
+      console.log("hello world");
+      ```
+    html: <pre class="shiki github-dark has-diff" style="background-color:#1c1e24;color:#e1e4e8" tabindex="0"><code class="language-js line-numbers"><span class="line diff add"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"hello world"</span><span style="color:#E1E4E8">);</span></span></code></pre>
+
+  - desc: template tag component gjs
+    md: |
+      ```gjs {data-filename=app/components/hello.gjs}
+      import { on } from '@ember/modifier';
+      import FancyButton from './fancy-button';
+      function greet() {
+        alert("AHOY!")
+      }
+      <template>
+        <p>Hello, {{@name}}!</p>
+        <FancyButton @label="Say hello!" {{on "click" greet}} />
+      </template>
+      ```
+    html: |
+      <div><div class="filename gjs">app/components/hello.gjs</div><pre class="shiki github-dark" style="background-color:#1c1e24;color:#e1e4e8" tabindex="0"><code class="language-gjs line-numbers"><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { on } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@ember/modifier'</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> FancyButton </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './fancy-button'</span><span style="color:#E1E4E8">;</span></span>
+      <span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> greet</span><span style="color:#E1E4E8">() {</span></span>
+      <span class="line"><span style="color:#B392F0">  alert</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"AHOY!"</span><span style="color:#E1E4E8">)</span></span>
+      <span class="line"><span style="color:#E1E4E8">}</span></span>
+      <span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">template</span><span style="color:#E1E4E8">&gt;</span></span>
+      <span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;Hello, </span><span style="color:#F97583">{{</span><span style="color:#79B8FF">@name</span><span style="color:#F97583">}}</span><span style="color:#E1E4E8">!&lt;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">&gt;</span></span>
+      <span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#B392F0">FancyButton</span><span style="color:#E1E4E8;font-style:italic"> @</span><span style="color:#B392F0">label</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Say hello!"</span><span style="color:#F97583"> {{on </span><span style="color:#9ECBFF">"click"</span><span style="color:#79B8FF"> greet</span><span style="color:#F97583">}}</span><span style="color:#E1E4E8"> /&gt;</span></span>
+      <span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">template</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+      </div>
